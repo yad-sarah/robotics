@@ -34,9 +34,8 @@ class SaveOnBestTrainingRewardCallback(BaseCallback):
             os.makedirs(self.save_path, exist_ok=True)
 
     def _on_step(self) -> bool:
-        print("callback (_on_step) is being executed")
+        #print("callback (_on_step) is being executed")
         if self.n_calls % self.check_freq == 0:
-
             # Retrieve training reward
             x, y = ts2xy(load_results(self.log_dir), "timesteps")
             if len(x) > 0:
@@ -75,7 +74,7 @@ mon_env=Monitor(env,log_dir)
 print("finished creating env")
 #n_actions = env.action_space.n
 model = TD3('MlpPolicy', mon_env, verbose=1)
-callback_1=SaveOnBestTrainingRewardCallback
+callback_1=SaveOnBestTrainingRewardCallback(check_freq=100,log_dir=log_dir)
 os.makedirs(log_dir, exist_ok=True)
 print("starting learning ...")
 model.learn(total_timesteps=total_timesteps, callback=callback_1 ,log_interval=1)

@@ -3,7 +3,7 @@ import robosuite as suite
 
 def make_env_fn(env_name="Lift", robots=["Panda"]):
     def _init():
-        print('creating env ...')
+        print('creating env (inner) ...')
         env = suite.make(
             env_name=env_name,
             robots=robots,
