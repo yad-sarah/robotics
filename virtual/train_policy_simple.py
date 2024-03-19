@@ -7,7 +7,7 @@ from stable_baselines3.common.monitor import Monitor
 from utils.other_utils import *
 
 log_dir = "./logs"
-total_timesteps=int(1e5)
+total_timesteps=int(1e6)
 print("creating env ...")
 env = suite.make(
             env_name="Lift",
@@ -16,6 +16,7 @@ env = suite.make(
             render_camera="frontview",
             has_offscreen_renderer=False,
             use_camera_obs=False,  # Not using camera observations
+            reward_shaping=True
         )
 env = GymWrapper(env)
 mon_env=Monitor(env,log_dir)
