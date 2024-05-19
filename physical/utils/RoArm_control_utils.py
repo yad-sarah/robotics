@@ -1,7 +1,7 @@
 import requests
 
 # Base URL of your toy's server
-BASE_URL = "http://192.168.20.2/"
+BASE_URL = "http://192.168.20.5/"
 
 
 def send_command(inputT, inputA, inputB):
