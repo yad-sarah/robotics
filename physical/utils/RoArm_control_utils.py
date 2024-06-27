@@ -1,7 +1,7 @@
 import requests
 
 # Base URL of your toy's server
-BASE_URL = "http://192.168.20.5/"
+BASE_URL = "http://192.168.20.9/"
 
 
 def send_command(inputT, inputA, inputB):
@@ -73,6 +73,23 @@ def adjust_servo_config(servo_id, direction):
     """Servo_id should include the servo number and direction as 11 or 12 for -/+ respectively."""
     send_command(6, servo_id, 0)
 
+def get_present_position():
+    url = f"{BASE_URL}readData"
+    try:
+        response = requests.get(url, timeout=5)
+        data = response.json()
+        #print("Current Position/Data:", data)
+        return data
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching present position: {e}")
+        return None
+
+
+def return_to_position(position_data):
+    for servo, position in position_data.items():
+        if servo.startswith('A'):
+            servo_number = int(servo[1:])
+            send_command(1, servo_number, position)
 
 # Emergency Stop
 def emergency_stop():
