@@ -1,7 +1,7 @@
 import requests
-
+from physical.misc_params import *
 # Base URL of your toy's server
-BASE_URL = "http://192.168.20.9/"
+#BASE_URL = "http://192.168.20.9/"
 
 
 def send_command(inputT, inputA, inputB):
